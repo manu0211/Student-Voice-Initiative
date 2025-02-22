@@ -210,6 +210,33 @@
             background: #38b6fd;
             color: white;
         }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px; /* Adjust as needed */
+            margin: 0 auto;
+        }
+
+        .text {
+            text-align: center;
+            flex: 1; /* Allows text to take up available space */
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a img {
+            width: 30px; /* Adjust icon size */
+            height: auto;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .social-links a img:hover {
+            transform: scale(1.2);
+        }
     
         @media (max-width: 768px) {
             header {
