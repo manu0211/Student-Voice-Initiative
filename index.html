@@ -239,8 +239,13 @@
         }
         .social-links {
             display: flex;
-            gap: 15px;
-            justify-content: flex-end; /* Align social links to the right */
+            flex-direction: column; /* Stack the groups vertically */
+            gap: 10px; /* Add space between the groups */
+        }
+        .social-links div {
+            display: flex; /* Keep icons in a row within each group */
+            gap: 15px; /* Space between icons */
+            justify-content: flex-end; /* Align to the right */
         }
         .social-links img {
             width: 50px; /* Adjust size of icons */
