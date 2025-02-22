@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Voice Initiative</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #f4f4f9, #e0e0e0);
+            color: #000000;
+        }
+        header {
+            background: linear-gradient(120deg, #38b6fd, #38b6fd);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #000000;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-right: 5px;
+        }
+        nav a:hover {
+            background: #38b6fd;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+        nav a.active {
+            background: #38b6fd;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+        .menu {
+            display: flex;
+            gap: 15px;
+            transition: max-height 0.3s ease;
+        }
+        .menu a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .menu a:hover {
+            background: #38b6fd;
+            border-radius: 4px;
+        }
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+        section {
+            padding: 40px;
+            margin: 50px auto;
+            max-width: 1225px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        section.active {
+            display: block;
+        }
+        h1, h2 {
+            text-align: center;
+            font-weight: 600;
+        }
+        footer {
+            background: #000000;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-rows: repeat(minmax(300px, auto));
+            gap: 20px;
+            padding: 10px;
+        }
+        .video-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .video-container iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+        }
+        .video-container p {
+            padding: 10px;
+            text-align: center;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .contact-form input, .contact-form textarea {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+        .contact-form button {
+            background: white;
+            color: rgb(0, 0, 0);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 10px;
+        }
+        .contact-form button:hover {
+            background: #38b6fd;
+            color: white;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .contact iframe {
+            width: 100px;
+            height: 100px;
+            border: none;
+        }
+        .container p {
+            padding: 10px;
+            text-align: center;
+        }
+        .pdf-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: #f9f9f9;
+        }
+        .pdf-viewer {
+            width: 95%;
+            height: 500px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .pdf-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+        }
+        .reedsy-button {
+            background: white;
+            color: rgb(0, 0, 0);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 10px;
+        }       
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0px auto;
+            font-size: 22px;
+        }
+        .profile .profile-pic {
+            width: 800px;
+            height: 180px;
+            border-radius: 20%;
+            margin-right: 20px;
+            object-fit: cover;
+        }
+        .reedsy-button:hover {
+            background: #38b6fd;
+            color: white;
+        }
+        @media (max-width: 768px) {
+            header {
+                padding: 10px;
+                font-size: 16px;
+            }
+            nav {
+                flex-direction: column;
+                align-items: left;
+            }
+            nav a {
+                padding: 10px;
+                font-size: 14px;
+            }
+            .grid {
+                grid-template-columns: 1fr; /* Single column on small screens */
+                gap: 10px;
+            }
+            .profile {
+                flex-direction: column;
+                font-size: 16px;
+                margin-bottom: 10px;
+                margin-right: 0px;
+            }
+            .profile .profile-pic {
+                width: 95%;
+                height: 290px;
+                border-radius: 20%;
+                margin-bottom: 10px;
+                margin-right: 0px;
+            }
+            .video-container iframe, 
+            .pdf-container iframe {
+                width: 100%;
+                height: 250px; /* Smaller height for videos/documents */
+            }
+            section {
+                padding: 20px 10px;
+                margin: 20px auto;
+                font-size: 14px;
+                width: 85%;
+            }
+            footer {
+                font-size: 14px;
+                padding: 10px;
+                margin: 0px auto;
+            }
+            .contact-form input, 
+            .contact-form textarea {
+                width: 88%;
+                font-size: 14px;
+            }
+            .contact-form button {
+                width: 95%;
+                font-size: 14px;
+            }
+            .menu {
+                display: none;
+                flex-direction: column;
+                max-height: 0;
+                overflow: hidden;
+                align-content: left;
+            }
+            .menu.active {
+                display: flex;
+                max-height: 300px; /* Adjust based on your menu items */
+                background: #000000;
+                align-content: left;
+            }
+            .hamburger {
+                display: block;
+                align-content: left;
+                margin-left: 20px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Student Voice Initiative</h1>
+        <p>Insert Slogan</p>
+    </header>
+
+    <nav>
+        <div class="hamburger" onclick="toggleMenu()">
+            ≡ Menu
+        </div>
+        <div class="menu" id="menu">
+            <a href="#" onclick="showSection('pageone')">Page 1</a>
+            <a href="#" onclick="showSection('pagetwo')">Page 2</a>
+            <a href="#" onclick="showSection('pagethree')">Page 3</a>
+            <a href="#" onclick="showSection('pagefour')">Page 4</a>
+        </div>
+    </nav>
+
+    <section id="pageone" class="active">
+        <h2>Welcome to the SVI</h2>
+        <div class="profile">
+            <img src="image.jpg" class="logo">
+            <p>Main Introduction</p>
+        </div>
+        <p>Goal Explanation</p>
+        <p>Goal Explanation</p>
+        <p>Goal Explanation</p>
+    </section>
+
+    <section id="pagetwo">
+        <div class="grid">
+            <div class="container">
+                <h2>Asociación Escuelas Lincoln</h2>
+                <h3>
+                    Yap about it.
+                </h3>
+                <button onclick="window.open('https://www.google.com/maps/place/Asociación+Escuelas+Lincoln/@-34.4917593,-58.4847203,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcb1747b076cfd:0x8013e7638e68a019!8m2!3d-34.4917593!4d-58.4821454!16s%2Fm%2F03chp81?entry=ttu&g_ep=EgoyMDI1MDIxOS4xIKXMDSoASAFQAw%3D%3D', '_blank')" class="reedsy-button">
+                    Click Here to Access the School's Reviews
+        </div>
+        <div class="grid">
+            <div class="container">
+                <h2>Insert Stuff</h2>
+                <iframe src="Insert Link For Doc"> </iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="pagethree">
+        <h2>Expansion</h2>
+        <div class="grid">
+            <div class="video-container">
+                <h3>Plan</h3>
+                <iframe src="https://www.youtube.com/embed/samplevideo" allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <h3>Plan 2</h3>
+                <iframe src="https://www.youtube.com/embed/samplevideo" allowfullscreen></iframe>
+            </div>
+        <h2>How YOU Can Help</h2>
+        <div class="grid">
+            <div class="video-container">
+                <h3>Plan</h3>
+                <iframe src="https://www.youtube.com/embed/samplevideo" allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <h3>Plan 2</h3>
+                <iframe src="https://www.youtube.com/embed/samplevideo" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="pagefour">
+        <h2>Send Me An Email</h2>
+        <form id="contactForm" action="https://usebasin.com/f/669597016e19" method="POST" class="contact-form">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="submission_id" name="submission_id" placeholder="Your School" required>
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <p id="successMessage" style="display: none; color: #38b6fd; font-weight: bold; text-align: center;">Thank you for your message! I'll get back to you soon.</p>
+    </section>
+    
+    <script>
+        // Select the form and success message
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+    
+        // Handle the form submission
+        contactForm.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent default form submission behavior
+    
+            // Collect form data
+            const formData = new FormData(contactForm);
+    
+            try {
+                // Send form data using Fetch API
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                });
+    
+                if (response.ok) {
+                    // Clear the form fields
+                    contactForm.reset();
+    
+                    // Show the success message
+                    successMessage.style.display = 'block';
+    
+                    // Hide the success message after 3 seconds and redirect
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                        window.location.href = '#'; // Redirect to your homepage or a specific section
+                    }, 3000);
+                } else {
+                    alert('Something went wrong. Please try again later.');
+                }
+            } catch (error) {
+                alert('Error submitting the form. Please check your connection and try again.');
+            }
+        });
+    </script>
+
+    <footer>
+        <p>&copy; 2024 Manav Purswani. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelectorAll('nav a').forEach(link => {
+                if (link.getAttribute('onclick').includes(sectionId)) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
