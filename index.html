@@ -212,35 +212,34 @@
             background-color: #38b6fd; /* Adjust color as needed */
             padding: 10px 20px;
             display: flex;
-            justify-content: center;
+            justify-content: center; /* Center the header content */
             align-items: center;
             width: 100%;
         }
         .header-content {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             width: 100%;
             max-width: 1200px; /* Set a max-width for better layout */
+            position: relative; /* Allow positioning of elements */
         }
         .slogan {
             margin: 0;
             font-size: 35px; /* Adjust size as needed */
             color: white;
-            flex: 1; /* Allow it to take available space */
-            align-self: left;
+            position: absolute; /* Position the slogan absolutely */
+            left: 20px; /* Move it to the left */
         }
         .logo {
             max-width: 200px; /* Adjust size as needed */
             height: auto;
-            flex: 1; /* Allow it to take available space */
-            text-align: center; /* Center the logo */
+            margin: 0 auto; /* Center the logo */
         }
         .social-links {
             display: flex;
             gap: 15px;
             justify-content: flex-end; /* Align social links to the right */
-            flex: 1; /* Allow it to take available space */
+            margin-left: auto; /* Push social links to the right */
         }
         .social-links img {
             width: 75px; /* Adjust size of icons */
