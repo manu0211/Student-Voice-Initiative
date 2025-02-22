@@ -209,7 +209,7 @@
         }
         header {
         background-color: #f8f9fa; /* Adjust color as needed */
-        padding: 20px 0;
+        padding: 10px 20px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -217,30 +217,28 @@
         }
         .header-content {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            text-align: left;
-            gap: 15px; /* Adds spacing between elements */
+            width: 100%;
+            max-width: 1200px; /* Set a max-width for better layout */
         }
-        .text-logo-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .text-logo-container h1 {
+        .slogan {
             margin: 0;
-            font-size: 24px;
+            font-size: 24px; /* Adjust size as needed */
             color: #333;
+            flex: 1; /* Allow it to take available space */
         }
         .logo {
             max-width: 200px; /* Adjust size as needed */
             height: auto;
+            flex: 1; /* Allow it to take available space */
+            text-align: center; /* Center the logo */
         }
         .social-links {
             display: flex;
             gap: 15px;
-            justify-content: right;
+            justify-content: flex-end; /* Align social links to the right */
+            flex: 1; /* Allow it to take available space */
         }
         .social-links img {
             width: 40px; /* Adjust size of icons */
@@ -323,10 +321,8 @@
 <body>
     <header>
         <div class="header-content">
-            <div class="text">
-                <h1>Insert Slogan</h1>
-                <img src="https://i.postimg.cc/svnPM0G3/Screenshot-2025-02-21-at-11-16-42-PM.png" class="logo">
-            </div>
+            <h1 class="slogan">Insert Slogan</h1>
+            <img src="https://i.postimg.cc/svnPM0G3/Screenshot-2025-02-21-at-11-16-42-PM.png" class="logo">
             <div class="social-links">
                 <a href="https://instagram.com/svi.team" target="_blank">
                     <img src="https://i.postimg.cc/Qd0c6nNj/IMG-7329-3-removebg-preview.png" alt="Instagram">
