@@ -212,7 +212,7 @@
             background-color: #38b6fd; /* Adjust color as needed */
             padding: 10px 20px;
             display: flex;
-            justify-content: center; /* Center the header content */
+            justify-content: space-between; /* Space between items */
             align-items: center;
             width: 100%;
         }
@@ -227,13 +227,14 @@
             margin: 0;
             font-size: 35px; /* Adjust size as needed */
             color: white;
-            position: absolute; /* Position the slogan absolutely */
-            left: 20px; /* Move it to the left */
+            margin-right: auto; /* Push slogan to the left */
         }
         .logo {
             max-width: 200px; /* Adjust size as needed */
             height: auto;
-            margin: 0 auto; /* Center the logo */
+            position: absolute; /* Center the logo */
+            left: 50%; /* Move logo to the center */
+            transform: translateX(-50%); /* Adjust to center it */
         }
         .social-links {
             display: flex;
