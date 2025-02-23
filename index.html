@@ -426,55 +426,53 @@
 
     <section id="pagefour">
         <h2>Tell US How We Can Help YOU</h2>
-        <form id="contactForm" action="https://usebasin.com/f/669597016e19" method="POST" class="contact-form">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <input type="submission_id" name="submission_id" placeholder="Your School" required>
-            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        <form id="contactForm" class="contact-form">
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+            <input type="text" id="school" name="school" placeholder="Your School" required>
+            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
             <button type="submit">Send Message</button>
         </form>
-        <p id="successMessage" style="display: none; color: #38b6fd; font-weight: bold; text-align: center;">Thank you for your message! We'll get back to you soon.</p>
+        <p id="successMessage" style="display: none; color: #38b6fd; font-weight: bold; text-align: center;">
+            Thank you for your message! We'll get back to you soon.
+        </p>
     </section>
     
     <script>
-        // Select the form and success message
-        const contactForm = document.getElementById('contactForm');
-        const successMessage = document.getElementById('successMessage');
-    
-        // Handle the form submission
-        contactForm.addEventListener('submit', async (event) => {
-            event.preventDefault(); // Prevent default form submission behavior
+        document.getElementById("contactForm").addEventListener("submit", async function(event) {
+            event.preventDefault(); // Prevent default form submission
     
             // Collect form data
-            const formData = new FormData(contactForm);
+            const formData = {
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                school: document.getElementById("school").value,
+                message: document.getElementById("message").value
+            };
     
             try {
-                // Send form data using Fetch API
-                const response = await fetch(contactForm.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json',
-                    },
+                // Send data to Google Apps Script Web App
+                await fetch("https://script.google.com/macros/s/AKfycbzN4f6Be4ZjOc-UB2mnAJsw_DVy9TquHYwP942Asw92jwI9rXJqosNPaa_nE90RnVR0nw/exec", { // Replace with your Google Apps Script Web App URL
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData)
                 });
     
-                if (response.ok) {
-                    // Clear the form fields
-                    contactForm.reset();
+                // Clear form fields
+                document.getElementById("contactForm").reset();
     
-                    // Show the success message
-                    successMessage.style.display = 'block';
+                // Show success message
+                const successMessage = document.getElementById("successMessage");
+                successMessage.style.display = "block";
     
-                    // Hide the success message after 3 seconds and redirect
-                    setTimeout(() => {
-                        successMessage.style.display = 'none';
-                        window.location.href = '#'; // Redirect to your homepage or a specific section
-                    }, 3000);
-                } else {
-                    alert('Something went wrong. Please try again later.');
-                }
+                // Hide message after 3 seconds
+                setTimeout(() => {
+                    successMessage.style.display = "none";
+                }, 3000);
+    
             } catch (error) {
-                alert('Error submitting the form. Please check your connection and try again.');
+                alert("Error submitting the form. Please try again.");
             }
         });
     </script>
