@@ -600,5 +600,36 @@
             menu.classList.toggle('active');
         }
     </script>
+
+    <script>
+        document.getElementById("ratingForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevents the form from actually submitting
+
+            // Get form elements
+            const email = document.getElementById("email");
+            const name = document.getElementById("name");
+            const rating = document.getElementById("rating");
+            const comment = document.getElementById("comment");
+            const successMessage = document.getElementById("successMessage");
+
+            // Check if all required fields are filled
+            if (email.value && name.value && rating.value) {
+                // Show success message
+                successMessage.style.display = "block";
+
+                // Clear input fields
+                email.value = "";
+                name.value = "";
+                rating.value = "5"; // Reset rating to default
+                comment.value = "";
+
+                // Hide the success message after 3 seconds
+                setTimeout(() => {
+                    successMessage.style.display = "none";
+                }, 3000);
+            }
+        });
+    </script>
+
 </body>
 </html> 
