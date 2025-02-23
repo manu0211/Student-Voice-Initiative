@@ -6,6 +6,35 @@
     <title>Student Voice Initiative</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        #intro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+            overflow: hidden;
+        }
+        /* Video Styling */
+        #intro video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures full coverage */
+        }
+        /* Hide main content initially */
+        #main-content {
+            display: none;
+        }
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
@@ -370,6 +399,24 @@
     </style>
 </head>
 <body>
+    <div id="intro">
+        <video autoplay muted playsinline>
+            <source src="https://drive.google.com/file/d/1so162qXx8HS-F5GFITdBz-YMfGtSkSJM/view?usp=sharing" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        // Wait for 5 seconds, then fade out intro
+        setTimeout(() => {
+            document.getElementById('intro').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('intro').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            }, 1000); // Wait for fade-out transition
+        }, 5000);
+    </script>
+    
     <header>
         <div class="header-content">
             <h1 class="slogan">
