@@ -382,12 +382,67 @@
     <section id="pagerating">
         <div class="container">
             <h2>Leave A Rating</h2>
+            <form id="ratingForm">
+                <input type="email" id="email" placeholder="Your Email" required>
+                <input type="text" id="name" placeholder="Your Name" required>
+                <select id="rating" required>
+                    <option value="5">★★★★★</option>
+                    <option value="4">★★★★☆</option>
+                    <option value="3">★★★☆☆</option>
+                    <option value="2">★★☆☆☆</option>
+                    <option value="1">★☆☆☆☆</option>
+                </select>
+                <textarea id="comment" placeholder="Leave a comment (optional)"></textarea>
+                <button type="submit">Submit Rating</button>
+            </form>
         </div>
+        
         <br>
+    
         <div class="container">
             <h2>Our Ratings</h2>
+            <h3>Average Rating: <span id="avgRating">Loading...</span></h3>
+            <div id="reviews"></div>
         </div>
     </section>
+    
+    <script>
+    document.getElementById("ratingForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        var formData = {
+            email: document.getElementById("email").value,
+            name: document.getElementById("name").value,
+            rating: document.getElementById("rating").value,
+            comment: document.getElementById("comment").value
+        };
+        fetch("YOUR_WEB_APP_URL", {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData)
+        }).then(() => {
+            alert("Rating Submitted!");
+            loadRatings();  // Reload ratings after submission
+        });
+    });
+    function loadRatings() {
+        fetch("YOUR_WEB_APP_URL")
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("avgRating").innerText = data.average + " ★";
+            let reviewsHTML = "";
+            data.reviews.forEach(review => {
+                reviewsHTML += `<div>
+                    <strong>${review.name} (${review.rating} ★)</strong><br>
+                    <p>${review.comment || "No comment left."}</p>
+                    <hr>
+                </div>`;
+            });
+            document.getElementById("reviews").innerHTML = reviewsHTML;
+        });
+    }
+    loadRatings();
+    </script>
 
     <section id="pagetwo">
         <div class="container">
