@@ -392,7 +392,7 @@
                     <option value="2">★★☆☆☆</option>
                     <option value="1">★☆☆☆☆</option>
                 </select>
-                <textarea id="comment" placeholder="Leave a comment (optional)"></textarea>
+                <textarea id="comment" placeholder="Leave a Comment (Optional)"></textarea>
                 <button type="submit">Submit Rating</button>
             </form>
         </div>
@@ -415,7 +415,7 @@
             rating: document.getElementById("rating").value,
             comment: document.getElementById("comment").value
         };
-        fetch("YOUR_WEB_APP_URL", {
+        fetch("https://script.google.com/macros/s/AKfycbyFCTJDS4-GR5-wOCD1ENTh_geyNhmPXD2BOAYNFJrSCAodAjSn9gv8q60jKNqi8BUfhQ/exec", {
             method: "POST",
             mode: "no-cors",
             headers: { "Content-Type": "application/json" },
@@ -426,7 +426,7 @@
         });
     });
     function loadRatings() {
-        fetch("YOUR_WEB_APP_URL")
+        fetch("https://script.google.com/macros/s/AKfycbyFCTJDS4-GR5-wOCD1ENTh_geyNhmPXD2BOAYNFJrSCAodAjSn9gv8q60jKNqi8BUfhQ/exec")
         .then(response => response.json())
         .then(data => {
             document.getElementById("avgRating").innerText = data.average + " ★";
