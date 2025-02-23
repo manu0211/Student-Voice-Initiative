@@ -12,7 +12,7 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background: black;
+            background: #f7f7f7;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -27,8 +27,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
+            width: 80%;
+            height: 80%;
             object-fit: cover; /* Ensures full coverage */
         }
         /* Hide main content initially */
@@ -422,9 +422,6 @@
         video.addEventListener('play', function() {
             navBar.style.display = 'none'; // Hide the nav bar
         });
-        video.addEventListener('pause', function() {
-            navBar.style.display = 'block'; // Show the nav bar
-        });
         video.addEventListener('ended', function() {
             navBar.style.display = 'block'; // Show the nav bar when the video ends
         });
@@ -514,183 +511,4 @@
     <script>
     document.getElementById("ratingForm").addEventListener("submit", function(e) {
         e.preventDefault();
-        var formData = {
-            email: document.getElementById("email").value,
-            name: document.getElementById("name").value,
-            rating: document.getElementById("rating").value,
-            comment: document.getElementById("comment").value
-        };
-        fetch("https://script.google.com/macros/s/AKfycbyFCTJDS4-GR5-wOCD1ENTh_geyNhmPXD2BOAYNFJrSCAodAjSn9gv8q60jKNqi8BUfhQ/exec", {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData)
-        }).then(() => {
-            alert("Rating Submitted!");
-            loadRatings();  // Reload ratings after submission
-        });
-    });
-    function loadRatings() {
-        fetch("https://script.google.com/macros/s/AKfycbyFCTJDS4-GR5-wOCD1ENTh_geyNhmPXD2BOAYNFJrSCAodAjSn9gv8q60jKNqi8BUfhQ/exec")
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("avgRating").innerText = data.average + " ★";
-            let reviewsHTML = "";
-            data.reviews.forEach(review => {
-                reviewsHTML += `<div>
-                    <strong>${review.name} (${review.rating} ★)</strong><br>
-                    <p>${review.comment || "No comment left."}</p>
-                    <hr>
-                </div>`;
-            });
-            document.getElementById("reviews").innerHTML = reviewsHTML;
-        });
-    }
-    loadRatings();
-    </script>
-
-    <section id="pagetwo">
-        <div class="container">
-            <div class="grid">
-                <h2>Asociación Escuelas Lincoln</h2>
-                <h3>Yap about it.</h3>
-                <button onclick="window.open('https://www.google.com/maps/place/Asociación+Escuelas+Lincoln/@-34.4917593,-58.4847203,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcb1747b076cfd:0x8013e7638e68a019!8m2!3d-34.4917593!4d-58.4821454!16s%2Fm%2F03chp81?entry=ttu&g_ep=EgoyMDI1MDIxOS4xIKXMDSoASAFQAw%3D%3D', '_blank')" class="reedsy-button">
-                    Click Here to Access the School's Reviews on Google
-            </div>
-        </div>
-    </section>
-
-    <section id="pagethree">
-        <div class="container">
-            <h2>Something</h2>
-                <div class="grid">
-                    <div class="video-container">
-                        <h3>Plan</h3>
-                        <iframe src="https://www.youtube.com/embed/samplevideo" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="container">
-            <h2>Our Expansion Plans</h2>
-                <div class="grid">
-                    <div class="video-container">
-                        <h3>Plan</h3>
-                        <iframe src="https://www.youtube.com/embed/samplevideo" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="pagefour">
-        <h2>Tell US How We Can Help YOU</h2>
-        <form id="contactForm" class="contact-form">
-            <input type="text" id="name" name="name" placeholder="Your Name" required>
-            <input type="email" id="email" name="email" placeholder="Your Email" required>
-            <input type="text" id="school" name="school" placeholder="Your School" required>
-            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-        <p id="successMessage" style="display: none; color: #38b6fd; font-weight: bold; text-align: center;">
-            Thank you for your message! We'll get back to you soon.
-        </p>
-    </section>
-    
-    <script>
-        document.getElementById("contactForm").addEventListener("submit", async function(event) {
-            event.preventDefault(); // Prevent default form submission
-    
-            // Collect form data
-            const formData = {
-                name: document.getElementById("name").value,
-                email: document.getElementById("email").value,
-                school: document.getElementById("school").value,
-                message: document.getElementById("message").value
-            };
-    
-            try {
-                // Send data to Google Apps Script Web App
-                await fetch("https://script.google.com/macros/s/AKfycbw3HKaD37YE23BTibEM5IPnvHpsWE1I66AylrmA8dPMiCACUyagX4tgeVCrMX6DnPhh/exec", { // Replace with your Google Apps Script Web App URL
-                    method: "POST",
-                    mode: "no-cors",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(formData)
-                });
-    
-                // Clear form fields
-                document.getElementById("contactForm").reset();
-    
-                // Show success message
-                const successMessage = document.getElementById("successMessage");
-                successMessage.style.display = "block";
-    
-                // Hide message after 3 seconds
-                setTimeout(() => {
-                    successMessage.style.display = "none";
-                }, 3000);
-    
-            } catch (error) {
-                alert("Error submitting the form. Please try again.");
-            }
-        });
-    </script>
-
-    <footer>
-        <p>&copy; 2025 Manav Purswani. Matteo Brebbia. Juan Barra. Seamus Gardner. Emilio Gudiño. All rights reserved.</p>
-    </footer>
-
-    <script>
-        function showSection(sectionId) {
-            document.querySelectorAll('section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById(sectionId).classList.add('active');
-            document.querySelectorAll('nav a').forEach(link => {
-                link.classList.remove('active');
-            });
-            document.querySelectorAll('nav a').forEach(link => {
-                if (link.getAttribute('onclick').includes(sectionId)) {
-                    link.classList.add('active');
-                }
-            });
-        }
-        function toggleMenu() {
-            const menu = document.getElementById('menu');
-            menu.classList.toggle('active');
-        }
-    </script>
-
-    <script>
-        document.getElementById("ratingForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevents the form from actually submitting
-
-            // Get form elements
-            const email = document.getElementById("email");
-            const name = document.getElementById("name");
-            const rating = document.getElementById("rating");
-            const comment = document.getElementById("comment");
-            const successMessage = document.getElementById("successMessage");
-
-            // Check if all required fields are filled
-            if (email.value && name.value && rating.value) {
-                // Show success message
-                successMessage.style.display = "block";
-
-                // Clear input fields
-                email.value = "";
-                name.value = "";
-                rating.value = "5"; // Reset rating to default
-                comment.value = "";
-
-                // Hide the success message after 3 seconds
-                setTimeout(() => {
-                    successMessage.style.display = "none";
-                }, 3000);
-            }
-        });
-    </script>
-
-</body>
-</html> 
+        var formData =
