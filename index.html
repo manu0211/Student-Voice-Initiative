@@ -51,7 +51,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         nav {
-            display: none;
+            display: flex;
             justify-content: center;
             background: #000000;
             padding: 10px 0;
@@ -414,8 +414,7 @@
             document.getElementById('intro').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('intro').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block'; 
-                document.querySelector("nav").style.display = "flex"; // Ensure this is 'block' or 'flex' based on your layout
+                document.getElementById('main-content').style.display = 'block'; // Ensure this is 'block' or 'flex' based on your layout
             }, 1000); // Delay to allow the fade-out effect to complete
         }, 5000); // Adjust time as needed
     </script>
@@ -448,19 +447,21 @@
             </div>
         </div>
     </header>
-
-    <nav>
-        <div class="hamburger" onclick="toggleMenu()">
-            ≡ Menu
-        </div>
-        <div class="menu" id="menu">
-            <a href="#" onclick="showSection('pageone')">Welcome</a>
-            <a href="#" onclick="showSection('pagerating')">Ratings</a>
-            <a href="#" onclick="showSection('pagetwo')">Current Project</a>
-            <a href="#" onclick="showSection('pagethree')">Future Plans</a>
-            <a href="#" onclick="showSection('pagefour')">Contact Us</a>
-        </div>
-    </nav>
+    
+    <div id="main-content">
+        <nav>
+            <div class="hamburger" onclick="toggleMenu()">
+                ≡ Menu
+            </div>
+            <div class="menu" id="menu">
+                <a href="#" onclick="showSection('pageone')">Welcome</a>
+                <a href="#" onclick="showSection('pagerating')">Ratings</a>
+                <a href="#" onclick="showSection('pagetwo')">Current Project</a>
+                <a href="#" onclick="showSection('pagethree')">Future Plans</a>
+                <a href="#" onclick="showSection('pagefour')">Contact Us</a>
+            </div>
+        </nav>
+    </div>
 
     <section id="pageone" class="active">
         <h2>Welcome to the Student Voice Initiative</h2>
