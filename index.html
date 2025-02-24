@@ -11,7 +11,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100vh;
+            height: 100%;
             background: #f7f7f7;
             display: flex;
             align-items: center;
@@ -27,8 +27,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80%;
-            height: 80%;
+            width: 100%;
+            height: 100%;
             object-fit: cover; /* Ensures full coverage */
         }
         /* Hide main content initially */
@@ -416,15 +416,6 @@
                 document.getElementById('main-content').style.display = 'block'; // Ensure this is 'block' or 'flex' based on your layout
             }, 1000); // Delay to allow the fade-out effect to complete
         }, 5000); // Adjust time as needed
-        
-        const video = document.getElementById('intro');
-        const navBar = document.getElementById('nav'); // Make sure to use the correct id for your nav bar
-        video.addEventListener('play', function() {
-            navBar.style.display = 'none'; // Hide the nav bar
-        });
-        video.addEventListener('ended', function() {
-            navBar.style.display = 'block'; // Show the nav bar when the video ends
-        });
     </script>
     
     <header>
@@ -456,18 +447,20 @@
         </div>
     </header>
 
-    <nav>
-        <div class="hamburger" onclick="toggleMenu()">
-            ≡ Menu
-        </div>
-        <div class="menu" id="menu">
-            <a href="#" onclick="showSection('pageone')">Welcome</a>
-            <a href="#" onclick="showSection('pagerating')">Ratings</a>
-            <a href="#" onclick="showSection('pagetwo')">Current Project</a>
-            <a href="#" onclick="showSection('pagethree')">Future Plans</a>
-            <a href="#" onclick="showSection('pagefour')">Contact Us</a>
-        </div>
-    </nav>
+    <main-content>
+        <nav>
+            <div class="hamburger" onclick="toggleMenu()">
+                ≡ Menu
+            </div>
+            <div class="menu" id="menu">
+                <a href="#" onclick="showSection('pageone')">Welcome</a>
+                <a href="#" onclick="showSection('pagerating')">Ratings</a>
+                <a href="#" onclick="showSection('pagetwo')">Current Project</a>
+                <a href="#" onclick="showSection('pagethree')">Future Plans</a>
+                <a href="#" onclick="showSection('pagefour')">Contact Us</a>
+            </div>
+        </nav>
+    </main-content>
 
     <section id="pageone" class="active">
         <h2>Welcome to the Student Voice Initiative</h2>
