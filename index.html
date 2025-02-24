@@ -330,6 +330,10 @@
         }
 
         @media (max-width: 786px) {
+            /* Hide slogan on smaller screens */
+            .slogan {
+                display: none;
+            }
             /* Adjust header */
             header {
                 padding: 10px;
@@ -340,15 +344,11 @@
                 align-items: center;
                 text-align: center;
             }
-            .slogan {
-                font-size: 22px;
-                margin-left: 0;
-                margin-right: 0;
-            }
             .logo {
                 max-width: 150px;
                 margin-bottom: 10px;
             }
+            /* Navigation adjustments */
             nav {
                 flex-direction: column;
                 align-items: center;
@@ -356,8 +356,9 @@
             }
             .menu {
                 flex-direction: column;
-                display: none;
+                display: none; /* Initially hidden */
                 width: 100%;
+                background-color: #333; /* Background for visibility */
             }
             .menu a {
                 display: block;
@@ -365,11 +366,27 @@
                 font-size: 16px;
                 width: 100%;
                 text-align: center;
+                color: white;
+                text-decoration: none;
             }
+            /* Make the hamburger menu work */
             .hamburger {
                 display: block;
+                cursor: pointer;
+                font-size: 24px;
+                color: white;
                 text-align: center;
+                padding: 10px;
+                background-color: #444;
             }
+            .hamburger:hover {
+                background-color: #555;
+            }
+            /* When active, show the menu */
+            .menu.active {
+                display: flex;
+            }
+            /* Section adjustments */
             section {
                 padding: 20px;
                 margin: 20px auto;
@@ -378,6 +395,7 @@
                 font-size: 22px;
                 text-align: center;
             }
+            /* Adjust the grid layout */
             .grid {
                 grid-template-columns: 1fr;
                 gap: 15px;
@@ -388,6 +406,7 @@
             .pdf-viewer {
                 height: 400px;
             }
+            /* Social links */
             .social-links {
                 flex-direction: row;
                 justify-content: center;
@@ -396,12 +415,14 @@
             .social-links img {
                 width: 40px;
             }
+            /* Contact form */
             .contact-form input, .contact-form textarea {
                 width: 100%;
             }
             .contact-form button {
                 width: 100%;
             }
+            /* Rating form */
             .rating-form {
                 width: 100%;
                 margin-right: 0;
@@ -409,6 +430,7 @@
             .rating-form select {
                 width: 100%;
             }
+            /* Footer adjustments */
             footer {
                 padding: 15px;
                 font-size: 14px;
@@ -665,6 +687,9 @@
                 }
             });
         }
+    </script>
+
+    <script>
         function toggleMenu() {
             const menu = document.getElementById('menu');
             menu.classList.toggle('active');
