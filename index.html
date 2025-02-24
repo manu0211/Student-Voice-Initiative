@@ -50,7 +50,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         nav {
-            display: flex;
+            display: none;
             justify-content: center;
             background: #000000;
             padding: 10px 0;
@@ -413,18 +413,10 @@
             document.getElementById('intro').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('intro').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block'; // Ensure this is 'block' or 'flex' based on your layout
+                document.getElementById('main-content').style.display = 'block'; 
+                document.querySelector("nav").style.display = "flex"; // Ensure this is 'block' or 'flex' based on your layout
             }, 1000); // Delay to allow the fade-out effect to complete
         }, 5000); // Adjust time as needed
-        
-        const video = document.getElementById('intro');
-        const navBar = document.getElementById('menu'); // Make sure to use the correct id for your nav bar
-        video.addEventListener('play', function() {
-            navBar.style.display = 'none'; // Hide the nav bar
-        });
-        video.addEventListener('ended', function() {
-            navBar.style.display = 'block'; // Show the nav bar when the video ends
-        });
     </script>
     
     <header>
