@@ -645,25 +645,25 @@
                 message: document.getElementById("message").value
             };
     
-            // Show success message immediately
+            // Show success message
             const successMessage1 = document.getElementById("successMessage1");
             successMessage1.style.display = "block";
-    
-            // Clear form fields immediately
+
             document.getElementById("contactForm").reset();
-    
+
+            // Hide message after 3 seconds
+            setTimeout(() => {
+                    successMessage1.style.display = "none";
+                }, 3000);
+
             try {
                 // Send data to Google Apps Script Web App
-                await fetch("https://script.google.com/macros/s/AKfycbw3HKaD37YE23BTibEM5IPnvHpsWE1I66AylrmA8dPMiCACUyagX4tgeVCrMX6DnPhh/exec", {
+                await fetch("https://script.google.com/macros/s/AKfycbw3HKaD37YE23BTibEM5IPnvHpsWE1I66AylrmA8dPMiCACUyagX4tgeVCrMX6DnPhh/exec", { // Replace with your Google Apps Script Web App URL
                     method: "POST",
+                    mode: "no-cors",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(formData)
                 });
-    
-                // Hide success message after 3 seconds
-                setTimeout(() => {
-                    successMessage1.style.display = "none";
-                }, 3000);
     
             } catch (error) {
                 alert("Error submitting the form. Please try again.");
