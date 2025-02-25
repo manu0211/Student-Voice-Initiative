@@ -522,8 +522,8 @@
         <div class="container">
             <h2>Leave A Rating</h2>
             <form id="ratingForm" class="rating-form">
-                <input type="email" id="email" placeholder="Your Email" required>
                 <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
                 <select id="rating" required>
                     <option value="5">★★★★★</option>
                     <option value="4">★★★★☆</option>
@@ -551,8 +551,8 @@
     document.getElementById("ratingForm").addEventListener("submit", function(e) {
         e.preventDefault();
         var formData = {
-            email: document.getElementById("email").value,
             name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
             rating: document.getElementById("rating").value,
             comment: document.getElementById("comment").value
         };
