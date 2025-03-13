@@ -151,11 +151,9 @@
             padding: 10px;
             text-align: center;
         }
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-        }
-        .contact-form input, .contact-form textarea {
+        contact-form input,
+        .contact-form select,
+        .contact-form textarea {
             width: 100%;
             padding: 12px;
             border: 1px solid #ddd;
@@ -163,19 +161,30 @@
             font-size: 16px;
             font-family: 'Poppins', sans-serif;
         }
-        .contact-form button {
+        .contact-form select {
             background: white;
-            color: rgb(0, 0, 0);
-            padding: 10px;
+            cursor: pointer;
+            width: 102%;
+        }
+        .contact-form textarea {
+            resize: none;
+            height: 100px;
+        }
+        .contact-form button {
+            width: 102%;
+            background: white;
+            color: black;
             border: 1px solid #ddd;
             border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
+            padding: 12px;
+            font-size: 18px;
             font-weight: 600;
-            margin: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-bottom: 20px;
         }
         .contact-form button:hover {
-            background: #38b6fd;
+            background: #1f90e6;
             color: white;
         }
         .container {
