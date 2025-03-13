@@ -151,6 +151,13 @@
             padding: 10px;
             text-align: center;
         }
+        .rating-form {
+            display: flex;
+            flex-direction: column;
+            width: 95%;
+            gap: 15px;
+            margin-right: 25px;
+        }
         contact-form input,
         .contact-form select,
         .contact-form textarea {
@@ -160,6 +167,16 @@
             border-radius: 6px;
             font-size: 16px;
             font-family: 'Poppins', sans-serif;
+        }
+        }
+        .contact-form select {
+            background: white;
+            cursor: pointer;
+            width: 102%;
+        }
+        .contact-form textarea {
+            resize: none;
+            height: 100px;
         }
         .contact-form button {
             width: 102%;
@@ -187,10 +204,48 @@
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .contact iframe {
-            width: 100px;
+        .rating-form {
+            display: flex;
+            flex-direction: column;
+            width: 95%;
+            gap: 15px;
+            margin-right: 25px;
+        }
+        .rating-form input,
+        .rating-form select,
+        .rating-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .rating-form select {
+            background: white;
+            cursor: pointer;
+            width: 102%;
+        }
+        .rating-form textarea {
+            resize: none;
             height: 100px;
-            border: none;
+        }
+        .rating-button {
+            width: 102%;
+            background: white;
+            color: black;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .rating-button:hover {
+            background: #1f90e6;
+            color: white;
         }
         .container p {
             padding: 10px;
@@ -286,49 +341,6 @@
         }
         .social-links a img:hover {
             transform: scale(1.2);
-        }
-        .rating-form {
-            display: flex;
-            flex-direction: column;
-            width: 95%;
-            gap: 15px;
-            margin-right: 25px;
-        }
-        .rating-form input,
-        .rating-form select,
-        .rating-form textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-            font-family: 'Poppins', sans-serif;
-        }
-        .rating-form select {
-            background: white;
-            cursor: pointer;
-            width: 102%;
-        }
-        .rating-form textarea {
-            resize: none;
-            height: 100px;
-        }
-        .rating-button {
-            width: 102%;
-            background: white;
-            color: black;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            padding: 12px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            margin-bottom: 20px;
-        }
-        .rating-button:hover {
-            background: #1f90e6;
-            color: white;
         }
 
         @media (max-width: 800px) {
@@ -689,16 +701,16 @@
             .then(data => {
                 let requestsHTML = "";
                 data.requests.forEach(review => {
-                    reviewsHTML += `<div>
+                    requestsHTML += `<div>
                         <strong>${request.message} (${request.school} ★)</strong><br>
                         <p>${request.name || "No name left."}</p>
                         <hr>
                     </div>`;
                 });
-                document.getElementById("reviews").innerHTML = requestsHTML;
+                document.getElementById("requests").innerHTML = requestsHTML;
             });
         }
-        loadRatings();
+        loadRequests();
     </script>
 
     <footer>
