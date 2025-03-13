@@ -499,10 +499,10 @@
             </div>
             <div class="menu" id="menu">
                 <a href="#" onclick="showSection('pageone')">Welcome</a>
+                <a href="#" onclick="showSection('pagefour')">Requests</a>
                 <a href="#" onclick="showSection('pagerating')">Ratings</a>
                 <a href="#" onclick="showSection('pagetwo')">Current Project</a>
                 <a href="#" onclick="showSection('pagethree')">Future Plans</a>
-                <a href="#" onclick="showSection('pagefour')">Contact Us</a>
             </div>
         </nav>
     </div>
@@ -622,6 +622,7 @@
     </section>
 
     <section id="pagefour">
+        <div class="container">
         <h2>Tell US How We Can Help YOU</h2>
         <form id="contactForm" class="contact-form">
             <input type="text" id="name1" name="name" placeholder="Your Name" required>
@@ -633,6 +634,12 @@
         <p id="successMessage1" style="display: none; color: #38b6fd; font-weight: bold; text-align: center;">
             Thank you for your message! We'll get back to you soon.
         </p>
+        </div>
+        <div class = "container">
+            <h2>Requests Made</h2>
+            <br>
+            <div id="requests"></div>
+        </div>
     </section>
     
     <script>
@@ -665,12 +672,30 @@
                     mode: "no-cors",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(formData)
+                }).then(() => {
+                    loadRequests();  // Reload ratings after submission
                 });
     
             } catch (error) {
                 alert("Error submitting the form. Please try again.");
             }
         });
+        function loadRequests() {
+            fetch("https://script.google.com/macros/s/AKfycbw3HKaD37YE23BTibEM5IPnvHpsWE1I66AylrmA8dPMiCACUyagX4tgeVCrMX6DnPhh/exec")
+            .then(response => response.json())
+            .then(data => {
+                let requestsHTML = "";
+                data.requests.forEach(review => {
+                    reviewsHTML += `<div>
+                        <strong>${request.message} (${request.school} ★)</strong><br>
+                        <p>${request.name || "No name left."}</p>
+                        <hr>
+                    </div>`;
+                });
+                document.getElementById("reviews").innerHTML = requestsHTML;
+            });
+        }
+        loadRatings();
     </script>
 
     <footer>
