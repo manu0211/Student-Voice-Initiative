@@ -682,13 +682,13 @@
        
     <script>
         document.getElementById("contactForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevents default form submission
+            event.preventDefault(); // Prevent default form submission
     
-            // Get form elements (use correct IDs)
-            const email = document.getElementById("email1");
-            const name = document.getElementById("name1");
-            const message = document.getElementById("message");
-            const school = document.getElementById("school");
+            // Get form values
+            const name = document.getElementById("name1").value;
+            const email = document.getElementById("email1").value;
+            const school = document.getElementById("school").value;
+            const message = document.getElementById("message").value;
             const successMessage = document.getElementById("successMessage1");
     
             // Ensure required fields are filled
@@ -710,20 +710,21 @@
                     // Refresh the displayed requests
                     fetchRequests();
                 })
-                .catch(error => console.error("Error:", error));
+                .catch(error => console.error("Error submitting request:", error));
             }
         });
     
-        // Fetch requests and display them
+        // Fetch and display requests
         function fetchRequests() {
             fetch("https://script.google.com/macros/s/AKfycbyMmDZqxSl_5xJs944m-PZQfkyY70qoOSSkhMUq6D8VtOaCtc0fDTCnmrIeMS4zzcOdbw/exec")
                 .then(response => response.json())
                 .then(data => {
                     const requestContainer = document.getElementById("requests");
                     requestContainer.innerHTML = ""; // Clear existing requests
-                    
+    
                     data.forEach(req => {
                         const requestDiv = document.createElement("div");
+                        requestDiv.classList.add("request-item");
                         requestDiv.style.border = "1px solid #ccc";
                         requestDiv.style.padding = "10px";
                         requestDiv.style.marginBottom = "10px";
@@ -741,7 +742,7 @@
         }
     
         // Fetch existing requests when the page loads
-        fetchRequests();
+        document.addEventListener("DOMContentLoaded", fetchRequests);
     </script>
 
     <footer>
