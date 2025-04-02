@@ -679,44 +679,71 @@
             <div id="requests"></div>
         </div>
     </section>
-    
-    <script>
-        document.getElementById("requestForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-            var formData = {
-                name: document.getElementById("name1").value,
-                email: document.getElementById("email1").value,
-                rating: document.getElementById("school").value,
-                comment: document.getElementById("message").value
-            };
-            fetch("https://script.google.com/macros/s/AKfycbyb3l1H6xIZMfbq5WUWWL5OuqWP3NpoSnwBS2xowlO03b5-hdMbVcW4kyvCjXxO4qogRg/exec", {
-                method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData)
-            }).then(() => {
-                alert("Request Submitted!");
-                loadRequests()
-            });
-        });
-        function loadRequest() {
-            fetch("https://script.google.com/macros/s/AKfycbyb3l1H6xIZMfbq5WUWWL5OuqWP3NpoSnwBS2xowlO03b5-hdMbVcW4kyvCjXxO4qogRg/exec")
-            .then(response => response.json())
-            .then(data => {
-                let requestsHTML = "";
-                data.requests.forEach(request => {
-                    requestHTML += `<div>
-                        <strong>${request.message} (${request.school} ★)</strong><br>
-                        <p>${request.name || "No name left."}</p>
-                        <hr>
-                    </div>`;
-                });
-                document.getElementById("requests").innerHTML = requestsHTML;
-            });
-        }
-        loadRequests();
-    </script>
        
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevents default form submission
+    
+            // Get form values
+            const name = document.getElementById("name1").value;
+            const email = document.getElementById("email1").value;
+            const school = document.getElementById("school").value;
+            const message = document.getElementById("message").value;
+            const successMessage = document.getElementById("successMessage1");
+    
+            // Ensure required fields are filled
+            if (name && email && school && message) {
+                // Send data to Google Sheets
+                fetch("https://script.google.com/macros/s/AKfycbwBAghgLtVCJvFlV8KZOZzO3uBDNY-as921x92yni5SZtqfzqZVd1D5F9j8Zdbslw-wqA/exec", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, email, school, message })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    successMessage.style.display = "block"; // Show success message
+                    setTimeout(() => { successMessage.style.display = "none"; }, 3000);
+    
+                    // Clear form fields
+                    document.getElementById("contactForm").reset();
+    
+                    // Refresh the displayed requests
+                    fetchRequests();
+                })
+                .catch(error => console.error("Error:", error));
+            }
+        });
+    
+        // Fetch requests and display them
+        function fetchRequests() {
+            fetch("https://script.google.com/macros/s/AKfycbwBAghgLtVCJvFlV8KZOZzO3uBDNY-as921x92yni5SZtqfzqZVd1D5F9j8Zdbslw-wqA/exec")
+                .then(response => response.json())
+                .then(data => {
+                    const requestContainer = document.getElementById("requests");
+                    requestContainer.innerHTML = ""; // Clear existing requests
+                    
+                    data.forEach(req => {
+                        const requestDiv = document.createElement("div");
+                        requestDiv.style.border = "1px solid #ccc";
+                        requestDiv.style.padding = "10px";
+                        requestDiv.style.marginBottom = "10px";
+    
+                        requestDiv.innerHTML = `
+                            <strong>Name:</strong> ${req.name}<br>
+                            <strong>Email:</strong> ${req.email}<br>
+                            <strong>School:</strong> ${req.school}<br>
+                            <strong>Message:</strong> ${req.message}<br>
+                        `;
+                        requestContainer.appendChild(requestDiv);
+                    });
+                })
+                .catch(error => console.error("Error fetching requests:", error));
+        }
+    
+        // Fetch existing requests when the page loads
+        fetchRequests();
+    </script>
+
     <script>
         document.getElementById("requestForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Prevents the form from actually submitting
