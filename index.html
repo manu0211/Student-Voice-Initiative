@@ -715,7 +715,37 @@
             });
         }
         loadRequests();
-        </script>
+    </script>
+       
+    <script>
+        document.getElementById("requestForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevents the form from actually submitting
+
+            // Get form elements
+            const email = document.getElementById("email");
+            const name = document.getElementById("name");
+            const message = document.getElementById("message");
+            const school = document.getElementById("school");
+            const successMessage = document.getElementById("successMessage");
+
+            // Check if all required fields are filled
+            if (email.value && school.value && message.value) {
+                // Show success message
+                successMessage.style.display = "block";
+
+                // Clear input fields
+                email.value = "";
+                name.value = "";
+                message.value = ""; 
+                school.value = "";
+
+                // Hide the success message after 3 seconds
+                setTimeout(() => {
+                    successMessage.style.display = "none";
+                }, 3000);
+            }
+        });
+    </script>
 
     <footer>
         <p>&copy; 2025 Manav Purswani. Matteo Brebbia. Juan Barra. Seamus Gardner. Emilio Gudiño. All rights reserved.</p>
