@@ -696,8 +696,8 @@
                 // Send data to Google Sheets
                 fetch("https://script.google.com/macros/s/AKfycbyMmDZqxSl_5xJs944m-PZQfkyY70qoOSSkhMUq6D8VtOaCtc0fDTCnmrIeMS4zzcOdbw/exec", {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ name, email, school, message })
+                    headers: { "Content-Type": "https://script.google.com/macros/s/AKfycbyPQGN9zdgZp8EIyrkCPRah7bVbYSL94bAip2fHbrDi6l4OG-sqOghilqvUD1855cMEvw/exec" },
+                    body: new URLSearchParams({ name, email, school, message })
                 })
                 .then(response => response.json())
                 .then(data => {
@@ -742,36 +742,6 @@
     
         // Fetch existing requests when the page loads
         fetchRequests();
-    </script>
-
-    <script>
-        document.getElementById("contactForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevents the form from actually submitting
-
-            // Get form elements (use correct IDs)
-            const email = document.getElementById("email1");
-            const name = document.getElementById("name1");
-            const message = document.getElementById("message");
-            const school = document.getElementById("school");
-            const successMessage = document.getElementById("successMessage1");
-
-            // Check if all required fields are filled
-            if (email.value && school.value && message.value) {
-                // Show success message
-                successMessage.style.display = "block";
-
-                // Clear input fields
-                email.value = "";
-                name.value = "";
-                message.value = ""; 
-                school.value = "";
-
-                // Hide the success message after 3 seconds
-                setTimeout(() => {
-                    successMessage.style.display = "none";
-                }, 3000);
-            }
-        });
     </script>
 
     <footer>
