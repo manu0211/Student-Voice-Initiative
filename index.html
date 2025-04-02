@@ -660,9 +660,9 @@
 
     <section id="pagefour">
         <div class="container">
-            <h2>Tell US How We Can Help YOU</h2>
+            <h2>Tell Us How We Can Help You</h2>
             <form id="contactForm" class="contact-form">
-                <input type="text" id="name1" name="name" placeholder="Your Name">
+                <input type="text" id="name1" name="name" placeholder="Your Name" required>
                 <input type="email" id="email1" name="email" placeholder="Your Email" required>
                 <input type="text" id="school" name="school" placeholder="Your School" required>
                 <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
@@ -672,23 +672,25 @@
                 Thank you for your message! We'll get back to you soon.
             </p>
         </div>
+    
         <br>
-        <div class = "container">
+    
+        <div class="container">
             <h2>Requests Made</h2>
             <br>
             <div id="requests"></div>
         </div>
     </section>
-       
+    
     <script>
         document.getElementById("contactForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent default form submission
+            event.preventDefault(); // Prevent page reload
     
             // Get form values
-            const name = document.getElementById("name1").value;
-            const email = document.getElementById("email1").value;
-            const school = document.getElementById("school").value;
-            const message = document.getElementById("message").value;
+            const name = document.getElementById("name1").value.trim();
+            const email = document.getElementById("email1").value.trim();
+            const school = document.getElementById("school").value.trim();
+            const message = document.getElementById("message").value.trim();
             const successMessage = document.getElementById("successMessage1");
     
             // Ensure required fields are filled
@@ -701,13 +703,16 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    successMessage.style.display = "block"; // Show success message
+                    console.log("Form submitted successfully:", data);
+                    
+                    // Show success message
+                    successMessage.style.display = "block";
                     setTimeout(() => { successMessage.style.display = "none"; }, 3000);
     
                     // Clear form fields
                     document.getElementById("contactForm").reset();
     
-                    // Refresh the displayed requests
+                    // Refresh displayed requests
                     fetchRequests();
                 })
                 .catch(error => console.error("Error submitting request:", error));
@@ -719,8 +724,15 @@
             fetch("https://script.google.com/macros/s/AKfycbyMmDZqxSl_5xJs944m-PZQfkyY70qoOSSkhMUq6D8VtOaCtc0fDTCnmrIeMS4zzcOdbw/exec")
                 .then(response => response.json())
                 .then(data => {
+                    console.log("Fetched requests:", data);
+    
                     const requestContainer = document.getElementById("requests");
                     requestContainer.innerHTML = ""; // Clear existing requests
+    
+                    if (data.length === 0) {
+                        requestContainer.innerHTML = "<p>No requests submitted yet.</p>";
+                        return;
+                    }
     
                     data.forEach(req => {
                         const requestDiv = document.createElement("div");
@@ -728,6 +740,8 @@
                         requestDiv.style.border = "1px solid #ccc";
                         requestDiv.style.padding = "10px";
                         requestDiv.style.marginBottom = "10px";
+                        requestDiv.style.borderRadius = "5px";
+                        requestDiv.style.backgroundColor = "#f9f9f9";
     
                         requestDiv.innerHTML = `
                             <strong>Name:</strong> ${req.name}<br>
@@ -743,7 +757,7 @@
     
         // Fetch existing requests when the page loads
         document.addEventListener("DOMContentLoaded", fetchRequests);
-    </script>
+    </script>    
 
     <footer>
         <p>&copy; 2025 Manav Purswani. Matteo Brebbia. Juan Barra. Seamus Gardner. Emilio Gudiño. All rights reserved.</p>
