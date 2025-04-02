@@ -684,11 +684,11 @@
         document.getElementById("contactForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Prevents default form submission
     
-            // Get form values
-            const name = document.getElementById("name1").value;
-            const email = document.getElementById("email1").value;
-            const school = document.getElementById("school").value;
-            const message = document.getElementById("message").value;
+            // Get form elements (use correct IDs)
+            const email = document.getElementById("email1");
+            const name = document.getElementById("name1");
+            const message = document.getElementById("message");
+            const school = document.getElementById("school");
             const successMessage = document.getElementById("successMessage1");
     
             // Ensure required fields are filled
@@ -696,8 +696,8 @@
                 // Send data to Google Sheets
                 fetch("https://script.google.com/macros/s/AKfycbyMmDZqxSl_5xJs944m-PZQfkyY70qoOSSkhMUq6D8VtOaCtc0fDTCnmrIeMS4zzcOdbw/exec", {
                     method: "POST",
-                    headers: { "Content-Type": "https://script.google.com/macros/s/AKfycbyPQGN9zdgZp8EIyrkCPRah7bVbYSL94bAip2fHbrDi6l4OG-sqOghilqvUD1855cMEvw/exec" },
-                    body: new URLSearchParams({ name, email, school, message })
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, email, school, message })
                 })
                 .then(response => response.json())
                 .then(data => {
