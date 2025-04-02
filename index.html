@@ -593,6 +593,36 @@
     loadRatings();
     </script>
 
+    <script>
+        document.getElementById("ratingForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevents the form from actually submitting
+
+            // Get form elements
+            const email = document.getElementById("email");
+            const name = document.getElementById("name");
+            const rating = document.getElementById("rating");
+            const comment = document.getElementById("comment");
+            const successMessage = document.getElementById("successMessage");
+
+            // Check if all required fields are filled
+            if (email.value && name.value && rating.value) {
+                // Show success message
+                successMessage.style.display = "block";
+
+                // Clear input fields
+                email.value = "";
+                name.value = "";
+                rating.value = "5"; // Reset rating to default
+                comment.value = "";
+
+                // Hide the success message after 3 seconds
+                setTimeout(() => {
+                    successMessage.style.display = "none";
+                }, 3000);
+            }
+        });
+    </script>
+
     <section id="pagetwo">
         <div class="container">
             <div class="grid">
@@ -650,67 +680,42 @@
         </div>
     </section>
     
-<script>
-    document.getElementById("contactForm").addEventListener("submit", async function(event) {
-        event.preventDefault(); // Prevent default form submission
-
-        // Collect form data
-        const formData = {
-            name: document.getElementById("name1").value,
-            email: document.getElementById("email1").value,
-            school: document.getElementById("school").value,
-            message: document.getElementById("message").value
-        };
-
-        // Show success message
-        const successMessage1 = document.getElementById("successMessage1");
-        successMessage1.style.display = "block";
-
-        document.getElementById("contactForm").reset();
-
-        // Hide message after 3 seconds
-        setTimeout(() => {
-            successMessage1.style.display = "none";
-        }, 3000);
-
-        try {
-            // Send data to Google Apps Script Web App
-            await fetch("https://script.google.com/macros/s/AKfycbw3HKaD37YE23BTibEM5IPnvHpsWE1I66AylrmA8dPMiCACUyagX4tgeVCrMX6DnPhh/exec", { // Replace with your Google Apps Script Web App URL
+    <script>
+        document.getElementById("requestForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            var formData = {
+                name: document.getElementById("name1").value,
+                email: document.getElementById("email1").value,
+                rating: document.getElementById("school").value,
+                comment: document.getElementById("message").value
+            };
+            fetch("https://script.google.com/macros/s/AKfycbyb3l1H6xIZMfbq5WUWWL5OuqWP3NpoSnwBS2xowlO03b5-hdMbVcW4kyvCjXxO4qogRg/exec", {
                 method: "POST",
+                mode: "no-cors",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData)
+            }).then(() => {
+                alert("Request Submitted!");
+                loadRequests()
             });
-
-            loadRequests();  // Reload requests after submission
-
-        } catch (error) {
-            alert("Error submitting the form. Please try again.");
-        }
-    });
-
-    function loadRequests() {
-        fetch("https://script.google.com/macros/s/AKfycbymUFuKgXoNDEaPQj5c9KnM9aCBu-w0NgTpvA0Vh7D2VuYkvVYZms0nj0iOQIgct_zzXw/exec")
-        .then(response => response.json())
-        .then(data => {
-            let requestsHTML = "";
-            data.requests.forEach(request => { // FIX: Changed 'review' to 'request'
-                requestsHTML += `<div>
-                    <strong>${request.message} (${request.school})</strong><br>
-                    <p>${request.name || "No name left."}</p>
-                    <hr>
-                </div>`;
-            });
-            document.getElementById("requests").innerHTML = requestsHTML;
-        })
-        .catch(error => {
-            console.error("Error loading requests:", error);
-            document.getElementById("requests").innerHTML = "<p style='color: red;'>Failed to load requests.</p>";
         });
-    }
-
-    // Load requests when page loads
-    loadRequests();
-</script>
+        function loadRequest() {
+            fetch("https://script.google.com/macros/s/AKfycbyb3l1H6xIZMfbq5WUWWL5OuqWP3NpoSnwBS2xowlO03b5-hdMbVcW4kyvCjXxO4qogRg/exec")
+            .then(response => response.json())
+            .then(data => {
+                let requestsHTML = "";
+                data.requests.forEach(request => {
+                    requestHTML += `<div>
+                        <strong>${request.message} (${request.school} ★)</strong><br>
+                        <p>${request.name || "No name left."}</p>
+                        <hr>
+                    </div>`;
+                });
+                document.getElementById("requests").innerHTML = requestsHTML;
+            });
+        }
+        loadRequests();
+        </script>
 
     <footer>
         <p>&copy; 2025 Manav Purswani. Matteo Brebbia. Juan Barra. Seamus Gardner. Emilio Gudiño. All rights reserved.</p>
@@ -738,36 +743,6 @@
             const menu = document.getElementById('menu');
             menu.classList.toggle('active');
         }
-    </script>
-
-    <script>
-        document.getElementById("ratingForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevents the form from actually submitting
-
-            // Get form elements
-            const email = document.getElementById("email");
-            const name = document.getElementById("name");
-            const rating = document.getElementById("rating");
-            const comment = document.getElementById("comment");
-            const successMessage = document.getElementById("successMessage");
-
-            // Check if all required fields are filled
-            if (email.value && name.value && rating.value) {
-                // Show success message
-                successMessage.style.display = "block";
-
-                // Clear input fields
-                email.value = "";
-                name.value = "";
-                rating.value = "5"; // Reset rating to default
-                comment.value = "";
-
-                // Hide the success message after 3 seconds
-                setTimeout(() => {
-                    successMessage.style.display = "none";
-                }, 3000);
-            }
-        });
     </script>
 
 </body>
