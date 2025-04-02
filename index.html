@@ -745,15 +745,15 @@
     </script>
 
     <script>
-        document.getElementById("requestForm").addEventListener("submit", function(event) {
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Prevents the form from actually submitting
 
-            // Get form elements
-            const email = document.getElementById("email");
-            const name = document.getElementById("name");
+            // Get form elements (use correct IDs)
+            const email = document.getElementById("email1");
+            const name = document.getElementById("name1");
             const message = document.getElementById("message");
             const school = document.getElementById("school");
-            const successMessage = document.getElementById("successMessage");
+            const successMessage = document.getElementById("successMessage1");
 
             // Check if all required fields are filled
             if (email.value && school.value && message.value) {
