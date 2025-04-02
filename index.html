@@ -694,7 +694,7 @@
             // Ensure required fields are filled
             if (name && email && school && message) {
                 // Send data to Google Sheets
-                fetch("https://script.google.com/macros/s/AKfycbwBAghgLtVCJvFlV8KZOZzO3uBDNY-as921x92yni5SZtqfzqZVd1D5F9j8Zdbslw-wqA/exec", {
+                fetch("https://script.google.com/macros/s/AKfycbyMmDZqxSl_5xJs944m-PZQfkyY70qoOSSkhMUq6D8VtOaCtc0fDTCnmrIeMS4zzcOdbw/exec", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ name, email, school, message })
@@ -716,7 +716,7 @@
     
         // Fetch requests and display them
         function fetchRequests() {
-            fetch("https://script.google.com/macros/s/AKfycbwBAghgLtVCJvFlV8KZOZzO3uBDNY-as921x92yni5SZtqfzqZVd1D5F9j8Zdbslw-wqA/exec")
+            fetch("https://script.google.com/macros/s/AKfycbyMmDZqxSl_5xJs944m-PZQfkyY70qoOSSkhMUq6D8VtOaCtc0fDTCnmrIeMS4zzcOdbw/exec")
                 .then(response => response.json())
                 .then(data => {
                     const requestContainer = document.getElementById("requests");
