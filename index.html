@@ -666,7 +666,7 @@
                 <input type="email" id="email1" name="email" placeholder="Your Email" required>
                 <input type="text" id="school" name="school" placeholder="Your School" required>
                 <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
-                <button type="submit1">Submit Request</button>
+                <button type="submit">Submit Request</button>
             </form>
             <p id="successMessage1" style="display: none; color: #38b6fd; font-weight: bold; text-align: center;">
                 Thank you for your message! We'll get back to you soon.
@@ -681,7 +681,7 @@
     </section>
     
     <script>
-        document.getElementById("contactForm").addEventListener("submit1", function(e) {
+        document.getElementById("contactForm").addEventListener("submit", function(e) {
             e.preventDefault();
             var formData = {
                 name: document.getElementById("name1").value,
@@ -704,9 +704,9 @@
             .then(response => response.json())
             .then(data => {
                 let contactHTML = "";
-                data.contact.forEach(review => {
+                data.contact.forEach(contact => {
                     contactHTML += `<div>
-                        <strong>${contact.message}${contact.school}</strong><br>
+                        <strong>${contact.message} - ${contact.school}</strong><br>
                         <p>${contact.name || "No name left."}</p>
                         <hr>
                     </div>`;
@@ -718,7 +718,7 @@
         </script>
     
         <script>
-            document.getElementById("contactForm").addEventListener("submit1", function(event) {
+            document.getElementById("contactForm").addEventListener("submit", function(event) {
                 event.preventDefault(); // Prevents the form from actually submitting
     
                 // Get form elements
