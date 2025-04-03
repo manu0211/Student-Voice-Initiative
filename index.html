@@ -683,81 +683,71 @@
     </section>
     
     <script>
-        document.getElementById("contactForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent page reload
+        document.getElementById("contactForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            var formData = {
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                school: document.getElementById("school").value,
+                message: document.getElementById("message").value
+            };
+            fetch("appscript", {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+            }).then(() => {
+                alert("Message Submitted!");
+                loadContact();  // Reload ratings after submission
+            });
+        });
+        function loadContact() {
+            fetch("appscript")
+            .then(response => response.json())
+            .then(data => {
+                let contactHTML = "";
+                data.contact.forEach(review => {
+                    contactHTML += `<div>
+                        <strong>${contact.message} (${contact.school} ★)</strong><br>
+                        <p>${contact.name || "No comment left."}</p>
+                        <hr>
+                    </div>`;
+                });
+                document.getElementById("contact").innerHTML = contactHTML;
+            });
+        }
+        loadContact();
+        </script>
     
-            // Get form values
-            const name = document.getElementById("name").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const school = document.getElementById("school").value.trim();
-            const message = document.getElementById("message").value.trim();
-            const successMessage = document.getElementById("successMessage1");
+        <script>
+            document.getElementById("contactForm").addEventListener("submit", function(event) {
+                event.preventDefault(); // Prevents the form from actually submitting
     
-            // Ensure required fields are filled
-            if (name && email && school && message) {
-                // Send data to Google Sheets
-                fetch("https://script.google.com/macros/s/AKfycbyMmDZqxSl_5xJs944m-PZQfkyY70qoOSSkhMUq6D8VtOaCtc0fDTCnmrIeMS4zzcOdbw/exec", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ name, email, school, message })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log("Form submitted successfully:", data);
-                    
+                // Get form elements
+                const email = document.getElementById("email");
+                const name = document.getElementById("name");
+                const school = document.getElementById("school");
+                const message = document.getElementById("message");
+                const successMessage = document.getElementById("successMessage");
+    
+                // Check if all required fields are filled
+                if (email.value && school.value && message.value) {
                     // Show success message
                     successMessage.style.display = "block";
-                    setTimeout(() => { successMessage.style.display = "none"; }, 3000);
     
-                    // Clear form fields
-                    document.getElementById("contactForm").reset();
+                    // Clear input fields
+                    email.value = "";
+                    name.value = "";
+                    school.value = ""; // Reset rating to default
+                    message.value = "";
     
-                    // Refresh displayed requests
-                    fetchRequests();
-                })
-                .catch(error => console.error("Error submitting request:", error));
-            }
-        });
-    
-        // Fetch and display requests
-        function fetchRequests() {
-            fetch("https://script.google.com/macros/s/AKfycbyMmDZqxSl_5xJs944m-PZQfkyY70qoOSSkhMUq6D8VtOaCtc0fDTCnmrIeMS4zzcOdbw/exec")
-                .then(response => response.json())
-                .then(data => {
-                    console.log("Fetched requests:", data);
-    
-                    const requestContainer = document.getElementById("requests");
-                    requestContainer.innerHTML = ""; // Clear existing requests
-    
-                    if (data.length === 0) {
-                        requestContainer.innerHTML = "<p>No requests submitted yet.</p>";
-                        return;
-                    }
-    
-                    data.forEach(req => {
-                        const requestDiv = document.createElement("div");
-                        requestDiv.classList.add("request-item");
-                        requestDiv.style.border = "1px solid #ccc";
-                        requestDiv.style.padding = "10px";
-                        requestDiv.style.marginBottom = "10px";
-                        requestDiv.style.borderRadius = "5px";
-                        requestDiv.style.backgroundColor = "#f9f9f9";
-    
-                        requestDiv.innerHTML = `
-                            <strong>Name:</strong> ${req.name}<br>
-                            <strong>Email:</strong> ${req.email}<br>
-                            <strong>School:</strong> ${req.school}<br>
-                            <strong>Message:</strong> ${req.message}<br>
-                        `;
-                        requestContainer.appendChild(requestDiv);
-                    });
-                })
-                .catch(error => console.error("Error fetching requests:", error));
-        }
-    
-        // Fetch existing requests when the page loads
-        document.addEventListener("DOMContentLoaded", fetchRequests);
-    </script>    
+                    // Hide the success message after 3 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = "none";
+                    }, 3000);
+                }
+            });
+        </script>
 
     <footer>
         <p>&copy; 2025 Manav Purswani. Matteo Brebbia. Juan Barra. Seamus Gardner. Emilio Gudiño. All rights reserved.</p>
