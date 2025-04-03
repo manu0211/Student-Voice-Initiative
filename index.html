@@ -691,7 +691,7 @@
                 school: document.getElementById("school").value,
                 message: document.getElementById("message").value
             };
-            fetch("appscript", {
+            fetch("https://script.google.com/macros/s/AKfycbxhmTm776rkZMaorDfu9yaMCcnS8nskfnKC9Ln48kRgMdFF3-ZiaSgn8h4X7Rv47OCKSA/exec", {
                 method: "POST",
                 mode: "no-cors",
                 headers: { "Content-Type": "application/json" },
@@ -702,7 +702,7 @@
             });
         });
         function loadContact() {
-            fetch("appscript")
+            fetch("https://script.google.com/macros/s/AKfycbxhmTm776rkZMaorDfu9yaMCcnS8nskfnKC9Ln48kRgMdFF3-ZiaSgn8h4X7Rv47OCKSA/exec")
             .then(response => response.json())
             .then(data => {
                 let contactHTML = "";
