@@ -662,8 +662,8 @@
         <div class="container">
             <h2>Tell Us How We Can Help You</h2>
             <form id="contactForm" class="contact-form">
-                <input type="text" id="name" name="name" placeholder="Your Name" required>
-                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                <input type="text" id="name1" name="name" placeholder="Your Name" required>
+                <input type="email" id="email1" name="email" placeholder="Your Email" required>
                 <input type="text" id="school" name="school" placeholder="Your School" required>
                 <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
                 <button type="submit">Submit Request</button>
@@ -686,8 +686,8 @@
         document.getElementById("contactForm").addEventListener("submit", function(e) {
             e.preventDefault();
             var formData = {
-                name: document.getElementById("name").value,
-                email: document.getElementById("email").value,
+                name: document.getElementById("name1").value,
+                email: document.getElementById("email1").value,
                 school: document.getElementById("school").value,
                 message: document.getElementById("message").value
             };
@@ -724,8 +724,8 @@
                 event.preventDefault(); // Prevents the form from actually submitting
     
                 // Get form elements
-                const name = document.getElementById("name");
-                const email = document.getElementById("email");
+                const name = document.getElementById("name1");
+                const email = document.getElementById("email1");
                 const school = document.getElementById("school");
                 const message = document.getElementById("message");
                 const successMessage = document.getElementById("successMessage");
