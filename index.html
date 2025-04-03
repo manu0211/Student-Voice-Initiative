@@ -708,8 +708,8 @@
                 let contactHTML = "";
                 data.contact.forEach(review => {
                     contactHTML += `<div>
-                        <strong>${contact.message} (${contact.school} ★)</strong><br>
-                        <p>${contact.name || "No comment left."}</p>
+                        <strong>${contact.message} ${contact.school}</strong><br>
+                        <p>${contact.email}</p>
                         <hr>
                     </div>`;
                 });
