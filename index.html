@@ -666,7 +666,7 @@
                 <input type="email" id="email1" name="email" placeholder="Your Email" required>
                 <input type="text" id="school" name="school" placeholder="Your School" required>
                 <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
-                <button type="submit">Submit Request</button>
+                <button type="submit1">Submit Request</button>
             </form>
             <p id="successMessage1" style="display: none; color: #38b6fd; font-weight: bold; text-align: center;">
                 Thank you for your message! We'll get back to you soon.
@@ -683,7 +683,7 @@
     </section>
     
     <script>
-        document.getElementById("contactForm").addEventListener("submit", function(e) {
+        document.getElementById("contactForm").addEventListener("submit1", function(e) {
             e.preventDefault();
             var formData = {
                 name: document.getElementById("name1").value,
@@ -720,7 +720,7 @@
         </script>
     
         <script>
-            document.getElementById("contactForm").addEventListener("submit", function(event) {
+            document.getElementById("contactForm").addEventListener("submit1", function(event) {
                 event.preventDefault(); // Prevents the form from actually submitting
     
                 // Get form elements
