@@ -708,8 +708,8 @@
                 let contactHTML = "";
                 data.contact.forEach(review => {
                     contactHTML += `<div>
-                        <strong>${contact.message} ${contact.school}</strong><br>
-                        <p>${contact.email}</p>
+                        <strong>${contact.message} (${contact.school} ★)</strong><br>
+                        <p>${contact.name || "No name left."}</p>
                         <hr>
                     </div>`;
                 });
@@ -733,7 +733,7 @@
                 // Check if all required fields are filled
                 if (email.value && school.value && message.value) {
                     // Show success message
-                    successMessage.style.display = "block";
+                    successMessage1.style.display = "block";
     
                     // Clear input fields
                     name.value = "";
@@ -743,7 +743,7 @@
     
                     // Hide the success message after 3 seconds
                     setTimeout(() => {
-                        successMessage.style.display = "none";
+                        successMessage1.style.display = "none";
                     }, 3000);
                 }
             });
