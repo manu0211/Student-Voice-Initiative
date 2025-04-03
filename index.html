@@ -739,4 +739,43 @@
                     email.value = "";
                     name.value = "";
                     school.value = ""; // Reset rating to default
-      
+                    message.value = "";
+    
+                    // Hide the success message after 3 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = "none";
+                    }, 3000);
+                }
+            });
+        </script>
+
+    <footer>
+        <p>&copy; 2025 Manav Purswani. Matteo Brebbia. Juan Barra. Seamus Gardner. Emilio Gudiño. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelectorAll('nav a').forEach(link => {
+                if (link.getAttribute('onclick').includes(sectionId)) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    </script>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html> 
