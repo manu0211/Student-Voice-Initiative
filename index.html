@@ -676,7 +676,7 @@
         <div class="container">
             <h2>Requests Made</h2>
             <br>
-            <div id="contact"></div>
+            <div id="contactmessages"></div>
         </div>
     </section>
     
@@ -696,10 +696,10 @@
                 body: JSON.stringify(formData)
             }).then(() => {
                 alert("Message Submitted!");
-                loadContact();  // Reload ratings after submission
+                loadContactmessages();  // Reload ratings after submission
             });
         });
-        function loadContact() {
+        function loadContactmessages() {
             fetch("https://script.google.com/macros/s/AKfycbxhmTm776rkZMaorDfu9yaMCcnS8nskfnKC9Ln48kRgMdFF3-ZiaSgn8h4X7Rv47OCKSA/exec")
             .then(response => response.json())
             .then(data => {
@@ -711,10 +711,10 @@
                         <hr>
                     </div>`;
                 });
-                document.getElementById("contact").innerHTML = contactHTML;
+                document.getElementById("contactmessages").innerHTML = contactHTML;
             });
         }
-        loadContact();
+        loadContactmessages();
         </script>
     
         <script>
