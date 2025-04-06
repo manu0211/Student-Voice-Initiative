@@ -684,7 +684,7 @@
         document.getElementById("contactForm").addEventListener("submit", function(e) {
             e.preventDefault();
             var formData = {
-                name: document.getElementById("name1").value,
+                name: document.getElementById("name1").value || "",
                 email: document.getElementById("email1").value,
                 school: document.getElementById("school").value,
                 message: document.getElementById("message").value
@@ -706,8 +706,8 @@
                 let contactHTML = "";
                 data.contact.forEach(contact => {
                     contactHTML += `<div>
-                        <strong>${contact.message} - ${contact.school}</strong><br>
-                        <p>${contact.name || "No name left."}</p>
+                        <strong>${contact.message}</strong><br>
+                        <p>${contact.name || "No name left."} - ${contact.school}</p>
                         <hr>
                     </div>`;
                 });
