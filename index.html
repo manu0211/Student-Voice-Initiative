@@ -718,6 +718,7 @@
                 console.error("Error submitting data:", error);
             });
         });
+        
         function loadContactMessages() {
             fetch("https://script.google.com/macros/s/AKfycbyjhvFl6uG1mHM-9bsMGyFpZo4CZ8F17YhXqgSecS3FlmGZawHJh2zRhxIyq1jdRp5ZHQ/exec")
             .then(response => response.json())
