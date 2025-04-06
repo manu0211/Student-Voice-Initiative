@@ -682,44 +682,24 @@
     
     <script>
         document.getElementById("contactForm").addEventListener("submit", function(e) {
-            e.preventDefault(); // Prevent default form submission
+            e.preventDefault();
             var formData = {
                 name: document.getElementById("name1").value,
                 email: document.getElementById("email1").value,
                 school: document.getElementById("school").value,
                 message: document.getElementById("message").value
             };
-            // Send data to Google Sheets
             fetch("https://script.google.com/macros/s/AKfycbyjhvFl6uG1mHM-9bsMGyFpZo4CZ8F17YhXqgSecS3FlmGZawHJh2zRhxIyq1jdRp5ZHQ/exec", {
                 method: "POST",
+                mode: "no-cors",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData)
-            }).then(response => response.text())  // Expecting a plain response
-            .then(data => {
-                console.log("Response:", data); // Debugging response
-    
-                // Show success message
-                document.getElementById("successMessage1").style.display = "block";
-    
-                // Clear input fields
-                document.getElementById("name1").value = "";
-                document.getElementById("email1").value = "";
-                document.getElementById("school").value = ""; 
-                document.getElementById("message").value = "";
-    
-                // Hide the success message after 3 seconds
-                setTimeout(() => {
-                    document.getElementById("successMessage1").style.display = "none";
-                }, 3000);
-    
-                // Reload messages after submission
-                loadContactMessages();
-            }).catch(error => {
-                console.error("Error submitting data:", error);
+            }).then(() => {
+                alert("Message Submitted!");
+                loadContactmessages(); 
             });
         });
-        
-        function loadContactMessages() {
+        function loadContactmessages() {
             fetch("https://script.google.com/macros/s/AKfycbyjhvFl6uG1mHM-9bsMGyFpZo4CZ8F17YhXqgSecS3FlmGZawHJh2zRhxIyq1jdRp5ZHQ/exec")
             .then(response => response.json())
             .then(data => {
@@ -727,18 +707,45 @@
                 data.contact.forEach(contact => {
                     contactHTML += `<div>
                         <strong>${contact.message} - ${contact.school}</strong><br>
-                        <p>${contact.name || "No name provided."}</p>
+                        <p>${contact.name || "No name left."}</p>
                         <hr>
                     </div>`;
                 });
                 document.getElementById("contactmessages").innerHTML = contactHTML;
-            }).catch(error => {
-                console.error("Error fetching messages:", error);
             });
         }
-        loadContactMessages();
-    </script>
+        loadContactmessages();
+        </script>
     
+        <script>
+            document.getElementById("contactForm").addEventListener("submit", function(event) {
+                event.preventDefault(); // Prevents the form from actually submitting
+    
+                // Get form elements
+                const name = document.getElementById("name1");
+                const email = document.getElementById("email1");
+                const school = document.getElementById("school");
+                const message = document.getElementById("message");
+                const successMessage = document.getElementById("successMessage1");
+    
+                // Check if all required fields are filled
+                if (email.value && school.value && message.value) {
+                    // Show success message
+                    successMessage.style.display = "block";
+    
+                    // Clear input fields
+                    name.value = "";
+                    email.value = "";
+                    school.value = ""; 
+                    message.value = "";
+    
+                    // Hide the success message after 3 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = "none";
+                    }, 3000);
+                }
+            });
+        </script>
 
     <footer>
         <p>&copy; 2025 Manav Purswani. Matteo Brebbia. Juan Barra. Seamus Gardner. Emilio Gudiño. All rights reserved.</p>
