@@ -689,18 +689,18 @@
                 school: document.getElementById("school").value,
                 message: document.getElementById("message").value
             };
-            fetch("https://script.google.com/macros/s/AKfycbxhmTm776rkZMaorDfu9yaMCcnS8nskfnKC9Ln48kRgMdFF3-ZiaSgn8h4X7Rv47OCKSA/exec", {
+            fetch("https://script.google.com/macros/s/AKfycbyjhvFl6uG1mHM-9bsMGyFpZo4CZ8F17YhXqgSecS3FlmGZawHJh2zRhxIyq1jdRp5ZHQ/exec", {
                 method: "POST",
                 mode: "no-cors",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData)
             }).then(() => {
                 alert("Message Submitted!");
-                loadContactmessages();  // Reload ratings after submission
+                loadContactmessages(); 
             });
         });
         function loadContactmessages() {
-            fetch("https://script.google.com/macros/s/AKfycbxhmTm776rkZMaorDfu9yaMCcnS8nskfnKC9Ln48kRgMdFF3-ZiaSgn8h4X7Rv47OCKSA/exec")
+            fetch("https://script.google.com/macros/s/AKfycbyjhvFl6uG1mHM-9bsMGyFpZo4CZ8F17YhXqgSecS3FlmGZawHJh2zRhxIyq1jdRp5ZHQ/exec")
             .then(response => response.json())
             .then(data => {
                 let contactHTML = "";
@@ -736,7 +736,7 @@
                     // Clear input fields
                     name.value = "";
                     email.value = "";
-                    school.value = ""; // Reset rating to default
+                    school.value = ""; 
                     message.value = "";
     
                     // Hide the success message after 3 seconds
