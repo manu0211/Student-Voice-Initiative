@@ -503,30 +503,6 @@
                 alert("Only @lincoln.edu.ar accounts are allowed.");
                 signOut();
             }
-
-            function signOut() {
-                const auth2 = gapi.auth2.getAuthInstance();
-                auth2.signOut().then(() => {
-                    location.reload();
-                });
-            }
-        
-            window.onload = () => {
-                gapi.load('auth2', () => {
-                    gapi.auth2.init().then(() => {
-                        console.log("Google Auth initialized");
-                    });
-                });
-        
-                // Fade out the intro after 5s
-                setTimeout(() => {
-                            document.getElementById('intro').style.opacity = '0';
-                    setTimeout(() => {
-                        document.getElementById('intro').style.display = 'none';
-                        document.getElementById('signin').style.display = 'block';
-                    }, 1000);
-                }, 5000);
-            };
     </script>
 
 <!-- Google API should load last so it can see onSignIn -->
