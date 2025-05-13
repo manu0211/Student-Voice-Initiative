@@ -6,7 +6,7 @@
     <title>Student Voice Initiative</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     
-    <meta name="886549989196-nr5ate0v4dsuc8jbsbq082ma5f4lh24n.apps.googleusercontent.com" content="886549989196-nr5ate0v4dsuc8jbsbq082ma5f4lh24n.apps.googleusercontent.com.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="886549989196-nr5ate0v4dsuc8jbsbq082ma5f4lh24n.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     
     <style>
@@ -483,6 +483,7 @@
                 document.getElementById('main-content').style.display = 'block'; // Ensure this is 'block' or 'flex' based on your layout
             }, 1000); // Delay to allow the fade-out effect to complete
         }, 5000); // Adjust time as needed
+        
         function onSignIn(googleUser) {
           const profile = googleUser.getBasicProfile();
           const email = profile.getEmail();
