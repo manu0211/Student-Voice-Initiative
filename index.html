@@ -698,33 +698,50 @@
                 school: document.getElementById("school").value,
                 message: document.getElementById("message").value
             };
-            fetch("https://script.google.com/macros/s/AKfycbz2IqcfYlOigTjcxyWlYZvCTsHedEZuhFsyPrP8VtIlmnPB0mrs2GtCWcllow2MdHtHZg/exec", {
+            fetch("https://script.google.com/macros/s/AKfycbyjhvFl6uG1mHM-9bsMGyFpZo4CZ8F17YhXqgSecS3FlmGZawHJh2zRhxIyq1jdRp5ZHQ/exec", {
                 method: "POST",
                 mode: "no-cors",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData)
             }).then(() => {
                 alert("Message Submitted!");
-                loadContactmessages(); 
+                loadContactmessages(); // Load the contact messages after submission
             });
         });
+    
         function loadContactmessages() {
-            fetch("https://script.google.com/macros/s/AKfycbz2IqcfYlOigTjcxyWlYZvCTsHedEZuhFsyPrP8VtIlmnPB0mrs2GtCWcllow2MdHtHZg/exec")
+            fetch("https://script.google.com/macros/s/AKfycbyjhvFl6uG1mHM-9bsMGyFpZo4CZ8F17YhXqgSecS3FlmGZawHJh2zRhxIyq1jdRp5ZHQ/exec")
             .then(response => response.json())
             .then(data => {
                 let contactHTML = "";
+                let currentTime = new Date();
+    
                 data.contact.forEach(contact => {
-                    contactHTML += `<div>
-                        <strong>${contact.message}</strong><br>
-                        <p>${contact.name || "No Name Left"} - ${contact.school}</p>
-                        <hr>
-                    </div>`;
+                    // Calculate the time difference in hours
+                    let submissionTime = new Date(contact.timestamp);
+                    let timeDifference = (currentTime - submissionTime) / (1000 * 60 * 60); // in hours
+    
+                    // Only show the message if it's been at least 24 hours
+                    if (timeDifference >= 24) {
+                        contactHTML += `<div>
+                            <strong>${contact.message}</strong><br>
+                            <p>${contact.name || "No Name Left"} - ${contact.school}</p>
+                            <hr>
+                        </div>`;
+                    }
                 });
+                
+                // If there are no messages older than 24 hours, show a message
+                if (contactHTML === "") {
+                    contactHTML = "<p>No messages older than 24 hours available yet.</p>";
+                }
+    
                 document.getElementById("contactmessages").innerHTML = contactHTML;
             });
         }
-        loadContactmessages();
-        </script>
+    
+        loadContactmessages(); // Call the function to load contact messages when the page loads
+    </script>
     
         <script>
             document.getElementById("contactForm").addEventListener("submit", function(event) {
