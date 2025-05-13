@@ -491,21 +491,18 @@
         function onSignIn(googleUser) {
             const profile = googleUser.getBasicProfile();
             const email = profile.getEmail();
-
+        
+            console.log("Signed in as:", email); // DEBUG LINE
+        
             if (email.endsWith("@lincoln.edu.ar")) {
+                console.log("Authorized user");
                 document.getElementById('signin').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
             } else {
+                console.log("Unauthorized user");
                 alert("Only @lincoln.edu.ar accounts are allowed.");
                 signOut();
             }
-        }
-
-        function signOut() {
-            const auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(() => {
-                location.reload(); // Force re-login
-            });
         }
     </script>
     
