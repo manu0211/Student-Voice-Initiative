@@ -475,33 +475,37 @@
     <div id="signin" class="g-signin2" data-onsuccess="onSignIn" style="display: none;"></div>
     
     <script>
-        // Wait for 5 seconds, then fade out intro
+        // Step 1: Wait for video to play for 5 seconds
         setTimeout(() => {
+            // Step 2: Fade out the intro
             document.getElementById('intro').style.opacity = '0';
+            
+            // Step 3: After fade, hide intro and show Google Sign-In
             setTimeout(() => {
                 document.getElementById('intro').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block'; // Ensure this is 'block' or 'flex' based on your layout
-            }, 1000); // Delay to allow the fade-out effect to complete
-        }, 5000); // Adjust time as needed
-        
+                document.getElementById('signin').style.display = 'block';
+            }, 1000); // 1s fade-out time
+        }, 5000); // Wait 5s before starting fade
+
+        // Google Sign-In success callback
         function onSignIn(googleUser) {
-          const profile = googleUser.getBasicProfile();
-          const email = profile.getEmail();
-    
-          if (email.endsWith("@lincoln.edu.ar")) {
-            document.getElementById('signin').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
-          } else {
-            alert("Only @lincoln.edu.ar accounts are allowed.");
-            signOut();
-          }
+            const profile = googleUser.getBasicProfile();
+            const email = profile.getEmail();
+
+            if (email.endsWith("@lincoln.edu.ar")) {
+                document.getElementById('signin').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            } else {
+                alert("Only @lincoln.edu.ar accounts are allowed.");
+                signOut();
+            }
         }
-    
+
         function signOut() {
-          const auth2 = gapi.auth2.getAuthInstance();
-          auth2.signOut().then(() => {
-            location.reload(); // Reload to re-trigger login
-          });
+            const auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(() => {
+                location.reload(); // Force re-login
+            });
         }
     </script>
     
