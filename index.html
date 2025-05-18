@@ -8,6 +8,7 @@
     
     <meta name="google-signin-client_id" content="886549989196-nr5ate0v4dsuc8jbsbq082ma5f4lh24n.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+
     
     <style>
         #intro {
@@ -348,7 +349,13 @@
             max-width: 800px; /* Prevents overly wide text */
             margin: 0 auto; /* Centers the container */
         }
-
+        .signin {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
         @media (max-width: 800px) {
             /* Hide slogan on smaller screens */
             .slogan {
@@ -465,6 +472,7 @@
 </head>
 
 <body>
+    <!-- Intro Video -->
     <div id="intro">
         <video autoplay muted playsinline preload="auto">
             <source src="https://media-hosting.imagekit.io//779c68bb79e44701/STudent%20Voice.mp4?Expires=1834957851&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=xGsFHKmn82SORANaVEUwKKl9l-IzawDeZDJQ0z55ZptoHf8mSO4eBIy51dI81C~~Pfwx7Iby8p04D-FG3TIDl26g-ragp51MOq3oTmTMN5EuSSO1Vfa7dQkT3oVnp5TIrAbjWwZnSaRzZaZNIGy~dDS6fLrzO0Ge0dN8wusSAybYSI51WttNxs-9d0ZFAViyXcQhJD4XhOZaRnqXo~g9oT9o8~MFTmm2Uv9aVk9eW6cbMl9SAB7XGl6AwRVS31S~sL6RHgdFaVc89XmrnOKeqwc5e9MM9X1mi50bzkg5EPODELWj5FcbPJJGQ-YzhA-FrTl36BjdTn80pVHiBpwqXw" type="video/mp4">
@@ -472,28 +480,43 @@
         </video>
     </div>
 
-    <div id="signin" class="g-signin2" data-onsuccess="onSignIn" style="display: none;"></div>
-    
+    <!-- Google Sign-In -->
+    <div id="signin" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+
+    <!-- Main Content Placeholder -->
+    <div id="main-content">
+        <h1>Welcome to the Student Voice Initiative!</h1>
+        <p>You're successfully signed in with your Lincoln account.</p>
+    </div>
+
     <script>
-        // Step 1: Wait for video to play for 5 seconds
+        // Initialize Google Auth when platform.js loads
+        function initGoogleAuth() {
+            gapi.load('auth2', () => {
+                gapi.auth2.init();
+            });
+        }
+
+        // Call initialization once Google script is loaded
+        window.addEventListener('load', initGoogleAuth);
+
+        // Handle intro video and sign-in display
         setTimeout(() => {
-            // Step 2: Fade out the intro
             document.getElementById('intro').style.opacity = '0';
-            
-            // Step 3: After fade, hide intro and show Google Sign-In
+
             setTimeout(() => {
                 document.getElementById('intro').style.display = 'none';
                 document.getElementById('signin').style.display = 'block';
-            }, 1000); // 1s fade-out time
-        }, 5000); // Wait 5s before starting fade
+            }, 1000); // 1s fade
+        }, 5000); // Wait 5s
 
         // Google Sign-In success callback
         function onSignIn(googleUser) {
             const profile = googleUser.getBasicProfile();
             const email = profile.getEmail();
-        
-            console.log("Signed in as:", email); // DEBUG LINE
-        
+
+            console.log("Signed in as:", email);
+
             if (email.endsWith("@lincoln.edu.ar")) {
                 console.log("Authorized user");
                 document.getElementById('signin').style.display = 'none';
@@ -503,6 +526,15 @@
                 alert("Only @lincoln.edu.ar accounts are allowed.");
                 signOut();
             }
+        }
+
+        // Sign-out function
+        function signOut() {
+            const auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(() => {
+                console.log('User signed out.');
+                location.reload();
+            });
         }
     </script>
 
